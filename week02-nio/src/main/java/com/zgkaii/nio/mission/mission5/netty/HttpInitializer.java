@@ -1,4 +1,4 @@
-package com.zgkaii.nio.mission.misision5.netty;
+package com.zgkaii.nio.mission.mission5.netty;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

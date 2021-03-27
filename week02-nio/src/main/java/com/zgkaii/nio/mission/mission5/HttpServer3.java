@@ -1,23 +1,28 @@
-package com.zgkaii.nio.mission.misision5;
+package com.zgkaii.nio.mission.mission5;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @Author: Mr.Z
- * @DateTime: 2021/03/26 15:57
- * @Description: 单线程Socket程序
+ * @DateTime: 2021/03/26 16:11
+ * @Description: HttpServer3
  */
-public class HttpServer1 {
+public class HttpServer3 {
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(8801);
+        ExecutorService executorService = Executors.newFixedThreadPool(
+                Runtime.getRuntime().availableProcessors() + 2);
+        final ServerSocket serverSocket = new ServerSocket(8803);
         while (true) {
             try {
-                Socket socket = serverSocket.accept();
-                service(socket);
+                final Socket socket = serverSocket.accept();
+                executorService.execute(()->{
+                    service(socket);
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -29,7 +34,7 @@ public class HttpServer1 {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
             printWriter.println("HTTP/1.1 200 OK");
             printWriter.println("Content-Type:text/html;charset=utf-8");
-            String body = "hello,nio1";
+            String body = "hello,nio3";
             printWriter.println("Content-length:" + body.getBytes().length);
             printWriter.println();
             printWriter.write(body);
