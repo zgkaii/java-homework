@@ -1,4 +1,4 @@
-package com.zgkaii.nio.mission.mission5.netty;
+package com.zgkaii.nio.demo.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
@@ -19,11 +19,14 @@ import io.netty.handler.logging.LoggingHandler;
 public class NettyHttpServer {
     public static void main(String[] args) throws InterruptedException {
         int port = 8804;
+        // 1. 声明线程池
         EventLoopGroup bossGroup = new NioEventLoopGroup(2);
         NioEventLoopGroup workerGroup = new NioEventLoopGroup(16);
 
         try {
+            // 2. 服务端引导器
             ServerBootstrap b = new ServerBootstrap();
+            // 5. 设置参数
             b.option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
@@ -33,15 +36,22 @@ public class NettyHttpServer {
                     .childOption(EpollChannelOption.SO_REUSEPORT, true)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-
-            b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+            // 3. 设置线程池
+            b.group(bossGroup, workerGroup)
+                    // 4. 设置ServerSocketChannel的类型
+                    .channel(NioServerSocketChannel.class)
+                    // 6. 设置ServerSocketChannel对应的Handler，只能设置一个
                     .handler(new LoggingHandler(LogLevel.INFO))
+                    // 7. 设置SocketChannel对应的Handler
                     .childHandler(new HttpInitializer());
 
+            // 8. 绑定端口
             Channel ch = b.bind(port).sync().channel();
             System.out.println("开启netty http服务器，监听地址和端口为 http://127.0.0.1:" + port + '/');
+            // 9. 等待服务端监听端口关闭，这里会阻塞主线程
             ch.closeFuture().sync();
         } finally {
+            // 10. 优雅地关闭两个线程池
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
