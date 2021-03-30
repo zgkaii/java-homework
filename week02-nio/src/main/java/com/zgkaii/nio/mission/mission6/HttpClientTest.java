@@ -21,7 +21,7 @@ public class HttpClientTest {
         // 响应
         CloseableHttpResponse httpResponse = null;
         // 创建Get请求
-        HttpGet httpGet = new HttpGet("http://localhost:8800/get");
+        HttpGet httpGet = new HttpGet("http://localhost:8800");
         try {
             // 执行get请求得到返回对象
             httpResponse = httpClient.execute(httpGet);

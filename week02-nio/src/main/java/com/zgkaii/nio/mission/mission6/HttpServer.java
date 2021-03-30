@@ -16,7 +16,9 @@ public class HttpServer {
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
-                service(socket);
+                new Thread(()->{
+                    service(socket);
+                }).start();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -28,8 +30,8 @@ public class HttpServer {
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream(), true);
             printWriter.println("HTTP/1.1 200 OK");
             printWriter.println("Content-Type:text/html;charset=utf-8");
-            String body = "hello,nio";
-            printWriter.println("Content-length:" + body.getBytes().length);
+            String body ="hello,nio2";
+            printWriter.println("Content-length:"+body.getBytes().length);
             printWriter.println();
             printWriter.write(body);
             printWriter.close();
