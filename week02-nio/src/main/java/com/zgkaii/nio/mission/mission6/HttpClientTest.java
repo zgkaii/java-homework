@@ -22,8 +22,6 @@ public class HttpClientTest {
         CloseableHttpResponse httpResponse = null;
         // 创建Get请求
         HttpGet httpGet = new HttpGet("http://localhost:8800/get");
-        // 设置请求头信息，鉴权
-        httpGet.setHeader("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
         try {
             // 执行get请求得到返回对象
             httpResponse = httpClient.execute(httpGet);
