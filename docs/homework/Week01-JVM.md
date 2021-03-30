@@ -1,14 +1,8 @@
-package com.zgkaii.jvm.misson.misson2;
+## 作业3
 
-import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+自定义一个 Classloader，加载一个 Hello.xlass 文件，执行 hello 方法，此文件内容是一个 Hello.class 文件所有字节（x=255-x）处理后的文件。
 
-/**
- * @Author: Mr.Z
- * @DateTime: 2021/03/19 10:01
- * @Description: 任务2：加载XClass文件
- */
+```java
 public class XClassLoader extends ClassLoader {
     private String path;
 
@@ -61,3 +55,11 @@ public class XClassLoader extends ClassLoader {
         method.invoke(instance, null);
     }
 }
+```
+
+## 作业3
+
+画一张图，展示 Xmx、Xms、Xmn、Meta、DirectMemory、Xss 这些内存参数的关系。
+
+ <div align="center"> <img src="..\images\JVM启动参数.png" width="800px"></div>
+
