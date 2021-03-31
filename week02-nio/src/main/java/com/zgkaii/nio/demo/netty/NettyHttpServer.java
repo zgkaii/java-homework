@@ -26,7 +26,7 @@ public class NettyHttpServer {
         try {
             // 2. 服务端引导器
             ServerBootstrap b = new ServerBootstrap();
-            // 5. 设置参数
+            // 3. 设置参数(非必须)
             b.option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.TCP_NODELAY, true)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
@@ -36,9 +36,9 @@ public class NettyHttpServer {
                     .childOption(EpollChannelOption.SO_REUSEPORT, true)
                     .childOption(ChannelOption.SO_KEEPALIVE, true)
                     .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-            // 3. 设置线程池
+            // 4. 设置线程池
             b.group(bossGroup, workerGroup)
-                    // 4. 设置ServerSocketChannel的类型
+                    // 5. 设置ServerSocketChannel的类型
                     .channel(NioServerSocketChannel.class)
                     // 6. 设置ServerSocketChannel对应的Handler，只能设置一个
                     .handler(new LoggingHandler(LogLevel.INFO))
