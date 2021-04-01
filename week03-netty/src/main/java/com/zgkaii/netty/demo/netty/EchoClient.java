@@ -1,24 +1,22 @@
-package com.zgkaii.nio.demo.netty;
+package com.zgkaii.netty.demo.netty;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.util.CharsetUtil;
-
-import java.net.InetSocketAddress;
 
 /**
  * @Author: Mr.Z
- * @DateTime: 2021/04/01 16:51
- * @Description:
- */
-public class NettyHttpClient {
+ * @DateTime: 2021/04/01 23:02
+ * @Description: 客户端
+ **/
+public class EchoClient {
     static final String HOST = System.getProperty("host", "127.0.0.1");
-    static final int PORT = Integer.parseInt(System.getProperty("port", "8804"));
+    static final int PORT = Integer.parseInt(System.getProperty("port", "8808"));
 
     public static void main(String[] args) throws Exception {
         // 1.创建一个 NioEventLoopGroup 对象实例

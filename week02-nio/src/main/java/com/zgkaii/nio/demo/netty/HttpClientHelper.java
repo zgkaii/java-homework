@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * @Author: Mr.Z
  * @DateTime: 2021/04/01 15:19
- * @Description:
+ * @Description: 作业1
  */
 public class HttpClientHelper {
     public static CloseableHttpClient httpClient = HttpClients.createDefault();

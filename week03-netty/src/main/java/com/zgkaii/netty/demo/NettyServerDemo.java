@@ -7,6 +7,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -23,6 +24,7 @@ import java.util.concurrent.ThreadLocalRandom;
  **/
 public class NettyServerDemo {
     static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
+
     public static void main(String[] args) throws Exception {
         // 1. 声明线程池
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -67,6 +69,7 @@ public class NettyServerDemo {
             // channel是在ServerBootstrapAcceptor中放到EventLoopGroup中的
             ChatHolder.join((SocketChannel) ctx.channel());
         }
+
         @Override
         protected void channelRead0(ChannelHandlerContext ctx, ByteBuf byteBuf) throws Exception {
             byte[] bytes = new byte[byteBuf.readableBytes()];

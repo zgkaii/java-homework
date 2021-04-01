@@ -2,19 +2,20 @@ package com.zgkaii.nio.demo.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.epoll.EpollChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
  * @Author: Mr.Z
  * @DateTime: 2021/03/26 16:21
- * @Description:
+ * @Description: Netty服务端
  */
 public class NettyHttpServer {
     public static void main(String[] args) throws InterruptedException {
@@ -43,7 +44,16 @@ public class NettyHttpServer {
                     // 6. 设置ServerSocketChannel对应的Handler，只能设置一个
                     .handler(new LoggingHandler(LogLevel.INFO))
                     // 7. 设置SocketChannel对应的Handler
-                    .childHandler(new HttpInitializer());
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel ch) {
+                            ChannelPipeline p = ch.pipeline();
+                            p.addLast(new HttpServerCodec());
+                            //p.addLast(new HttpServerExpectContinueHandler());
+                            p.addLast(new HttpObjectAggregator(1024 * 1024));
+                            p.addLast(new EchoServerHandler());
+                        }
+                    });
 
             // 8. 绑定端口
             Channel ch = b.bind(port).sync().channel();

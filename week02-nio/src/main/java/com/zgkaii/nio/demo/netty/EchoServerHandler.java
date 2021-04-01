@@ -23,7 +23,7 @@ import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
  * @DateTime: 2021/03/26 16:37
  * @Description:
  */
-public class HttpHandler extends ChannelInboundHandlerAdapter {
+public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
@@ -36,27 +36,25 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
         try {
             //logger.info("channelRead流量接口请求开始，时间为{}", startTime);
             FullHttpRequest fullRequest = (FullHttpRequest) msg;
-//            String uri = fullRequest.uri();
+            String uri = fullRequest.uri();
             //logger.info("接收到的请求url为{}", uri);
-            handlerBody(fullRequest, ctx);
-//            if (uri.contains("/test")) {
-//                handlerTest(fullRequest, ctx, "Hello,Mr.Z!");
-//            } else {
-//                handlerTest(fullRequest, ctx, "Hello,Everyone!");
-//            }
+//            handlerBody(fullRequest, ctx);
+            if (uri.contains("/test")) {
+                handlerTest(fullRequest, ctx, "Hello,Mr.Z!");
+            } else {
+                handlerTest(fullRequest, ctx, "Hello,Everyone!");
+            }
         } finally {
             ReferenceCountUtil.release(msg);
         }
         //logger.info("channelRead流量接口请求结束，时间为{}", System.currentTimeMillis() - startTime);
     }
 
-    private void handlerBody(FullHttpRequest fullRequest, ChannelHandlerContext ctx) throws IOException {
+    private void handlerTest(FullHttpRequest fullRequest, ChannelHandlerContext ctx, String body) {
         //long startTime = System.currentTimeMillis();
         FullHttpResponse response = null;
         try {
-            // 调用HttpClientHelper 获取value值
-            String value = HttpClientHelper.getAsString("http://localhost:8800");
-            System.out.println("response: " + value);
+            String value = body;
 
             response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(value.getBytes("UTF-8")));
             response.headers().set("Content-Type", "application/json");
@@ -77,11 +75,16 @@ public class HttpHandler extends ChannelInboundHandlerAdapter {
         }
     }
 
-    private void handlerTest(FullHttpRequest fullRequest, ChannelHandlerContext ctx, String body) {
+    /**
+     * 作业1
+     */
+    private void handlerBody(FullHttpRequest fullRequest, ChannelHandlerContext ctx) throws IOException {
         //long startTime = System.currentTimeMillis();
         FullHttpResponse response = null;
         try {
-            String value = body;
+            // 调用HttpClientHelper 获取value值
+            String value = HttpClientHelper.getAsString("http://localhost:8800");
+            System.out.println("response: " + value);
 
             response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(value.getBytes("UTF-8")));
             response.headers().set("Content-Type", "application/json");

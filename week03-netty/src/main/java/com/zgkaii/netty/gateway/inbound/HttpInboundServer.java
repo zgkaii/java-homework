@@ -15,6 +15,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * 整个程序如入口
+ */
 @Data
 public class HttpInboundServer {
 
