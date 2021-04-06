@@ -14,6 +14,7 @@ public class DaemonThread {
         };
         Thread thread = new Thread(task);
         thread.setName("test-thread-1");
+        // 守护线程
         thread.setDaemon(true);
         thread.start();
 
