@@ -14,7 +14,7 @@ public class JmsSender {
         
         SendService sendService = (SendService)context.getBean("sendService");
         
-//        sendService.send(student2);
+        sendService.send(student2);
         
         System.out.println("send successfully, please visit http://localhost:8161/admin to see it");
     }
