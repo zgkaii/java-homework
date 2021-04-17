@@ -1,6 +1,6 @@
 package com.zgkaii.spring;
 
-import com.zgkaii.spring.mission.mission2.IAccountService;
+import com.zgkaii.spring.mission.mission2.UserController;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,9 +24,12 @@ public class MissonTest {
 //                .getBean("accountService1");
 //        IAccountService as = (IAccountService) applicationContext
 //                .getBean("accountService2");
-        IAccountService as = (IAccountService) applicationContext
-                .getBean("accountService3");
+//        IAccountService as = (IAccountService) applicationContext
+//                .getBean("accountService3");
         // 调用IAccountService的saveAccount方法
-        as.saveAccount();
+//        as.saveAccount();
+        UserController userController = (UserController) applicationContext
+                .getBean("userController");
+        userController.testFunc();
     }
 }
