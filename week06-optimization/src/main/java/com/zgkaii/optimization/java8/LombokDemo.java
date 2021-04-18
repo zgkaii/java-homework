@@ -1,14 +1,19 @@
-package com.zgkaii.spring.demo.spring01;
+package com.zgkaii.optimization.java8;
 
 import lombok.extern.java.Log;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 @Log
 public class LombokDemo {
-    
+
     public static void main(String[] args) throws IOException {
-        
+
+        A a = new A(1, "KK");
+        System.out.println(a.toString());
+        A.builder().age(1).name("KKK").build();
+
         new LombokDemo().demo();
         
         Student student1 = new Student();
@@ -16,7 +21,8 @@ public class LombokDemo {
         student1.setName("KK01");
         System.out.println(student1.toString());
         
-        Student student2 = new Student(2, "KK02", null, null);
+        Student student2 = new Student(2, "KK02");
+        //student2.init();
         System.out.println(student2.toString());
     }
     
