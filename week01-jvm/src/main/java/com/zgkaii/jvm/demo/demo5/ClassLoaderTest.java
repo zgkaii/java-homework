@@ -1,6 +1,6 @@
 package com.zgkaii.jvm.demo.demo5;
 
-import sun.security.ec.CurveDB;
+import sun.security.util.CurveDB;
 
 /**
  * @Author: Mr.Z
