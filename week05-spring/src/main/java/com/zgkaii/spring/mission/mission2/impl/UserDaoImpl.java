@@ -1,6 +1,7 @@
 package com.zgkaii.spring.mission.mission2.impl;
 
 import com.zgkaii.spring.mission.mission2.UserDao;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: Mr.Z
@@ -8,6 +9,7 @@ import com.zgkaii.spring.mission.mission2.UserDao;
  * @Description:
  **/
 //@Repository("userDao")
+@Component
 public class UserDaoImpl implements UserDao {
     @Override
     public void save() {

@@ -1,8 +1,6 @@
 package com.zgkaii.spring.mission.mission2;
 
-import com.zgkaii.spring.mission.mission2.impl.UserDaoImpl;
-import com.zgkaii.spring.mission.mission2.impl.UserServiceImpl;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,20 +9,21 @@ import org.springframework.context.annotation.Configuration;
  * @Description:
  */
 @Configuration
+@ComponentScan
 public class SpringConfig {
 
-    @Bean
-    public UserService userService() {
-        return new UserServiceImpl();
-    }
-
-    @Bean
-    public UserDao userDao() {
-        return new UserDaoImpl();
-    }
-
-    @Bean
-    public UserController userController() {
-        return new UserController();
-    }
+//    @Bean
+//    public UserService userService() {
+//        return new UserServiceImpl();
+//    }
+//
+//    @Bean
+//    public UserDao userDao() {
+//        return new UserDaoImpl();
+//    }
+//
+//    @Bean
+//    public UserController userController() {
+//        return new UserController();
+//    }
 }
