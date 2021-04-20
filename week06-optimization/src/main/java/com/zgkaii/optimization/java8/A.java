@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Setter
 public class A {
-
     private int age;
 
     private String name;
-
 }
