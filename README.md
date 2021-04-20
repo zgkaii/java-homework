@@ -81,7 +81,7 @@
 - [ ] 5.（选做）总结一下，单例的各种写法，比较它们的优劣。
 - [ ] 6.（选做）maven/spring 的 profile 机制，都有什么用法？
 - [ ] 7.（选做）总结 Hibernate 与 MyBatis 的各方面异同点。
-- [ ] 8.（**必做**）给课程提供的 Student/Klass/School 实现自动配置和 Starter。
+- [x] 8.（**必做**）给课程提供的 Student/Klass/School 实现自动配置和 Starter。
 - [ ] 9.（选做）学习 MyBatis-generator 的用法和原理，学会自定义 TypeHandler 处理复杂类型。
 - [x] 10.（**必做**）研究一下 JDBC 接口和数据库连接池，掌握它们的设计和用法：
     - [x] a. 使用 JDBC 原生接口，实现数据库的增删改查操作。

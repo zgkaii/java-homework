@@ -56,4 +56,12 @@ public class MissonTest {
 //        // 销毁该容器
 //        context.destroy();
     }
+
+//    @Autowired
+//    private MessageService messageService;
+//
+//    @Test
+//    public void testMission08() {
+//        messageService.ding();
+//    }
 }
