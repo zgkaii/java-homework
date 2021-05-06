@@ -1,0 +1,308 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2021/5/7 1:18:17                             */
+/*==============================================================*/
+
+
+alter table cart
+   drop primary key;
+
+drop table if exists cart;
+
+alter table delivery_info
+   drop primary key;
+
+drop table if exists delivery_info;
+
+alter table orders
+   drop primary key;
+
+drop table if exists orders;
+
+alter table pay_info
+   drop primary key;
+
+drop table if exists pay_info;
+
+alter table product_brand
+   drop primary key;
+
+drop table if exists product_brand;
+
+alter table product_image
+   drop primary key;
+
+drop table if exists product_image;
+
+alter table product_spu
+   drop primary key;
+
+drop table if exists product_spu;
+
+alter table product_supplier
+   drop primary key;
+
+drop table if exists product_supplier;
+
+alter table product_warehouse
+   drop primary key;
+
+drop table if exists product_warehouse;
+
+alter table users
+   drop primary key;
+
+drop table if exists users;
+
+/*==============================================================*/
+/* Table: cart                                                  */
+/*==============================================================*/
+create table cart
+(
+   cartid               varchar(20) not null comment '购物车ID',
+   userid               int not null default NULL comment '用户表id',
+   proid                varchar(20) not null default NULL comment '商品id',
+   quantity             int(10) not null default NULL comment '产品数量',
+   checked              int(1) not null default NULL comment '是否选择,1=已勾选,0=未勾选',
+   createtime           datetime not null default NULL comment '创建时间',
+   updatetime           datetime not null default NULL comment '更新时间'
+)
+type = InnoDB;
+
+alter table cart
+   add primary key (cartid);
+
+alter table cart
+   add unique FK_Reference_2 (userid);
+
+alter table cart
+   add unique FK_Reference_3 (proid);
+
+/*==============================================================*/
+/* Table: delivery_info                                         */
+/*==============================================================*/
+create table delivery_info
+(
+   deliveryid           varchar(10) not null comment '收获信息id',
+   userid               int comment '用户id',
+   orderid              varchar(20) comment '订单id',
+   receivername         varchar(10) not null default NULL comment '收货人姓名',
+   receivermobile       varchar(11) not null default NULL comment '收货联系电话',
+   receiverprovince     varchar(20) not null default NULL comment '省份',
+   receivercity         varchar(10) not null default NULL comment '城市',
+   receiverdistrict     varchar(10) not null default NULL comment '区/县',
+   receiveraddress      varchar(640) not null default NULL comment '详细地址',
+   createtime           datetime not null default NULL,
+   updatetime           datetime not null default NULL
+)
+type = InnoDB;
+
+alter table delivery_info
+   add primary key (deliveryid);
+
+alter table delivery_info
+   add unique FK_Reference_10 ();
+
+alter table delivery_info
+   add unique FK_Reference_4 ();
+
+/*==============================================================*/
+/* Table: orders                                                */
+/*==============================================================*/
+create table orders
+(
+   orderid              varchar(20) not null comment '订单id',
+   proid                varchar(20) not null comment '商品id',
+   userid               int not null comment '用户id',
+   payment              decimal(20,2) not null comment '订单金额
+            ',
+   paymenttype          int(1) not null comment '支付类型:1-全额支付,2-分期支付',
+   postage              decimal(5,2) not null comment '运费',
+   status               int(1) not null comment '订单状态:0-已取消,1-未付款.2-已付款,4-已发货,5-交易成功,6-交易关闭',
+   paymenttime          datetime not null comment '支付时间',
+   sendtime             datetime not null comment '发货时间',
+   placetime            datetime not null comment '下单时间',
+   closetime            datetime not null comment '签收时间',
+   invoice              varchar(64) not null comment '发票抬头',
+   updatetime           datetime not null comment '更新时间'
+)
+type = InnoDB;
+
+alter table orders
+   add primary key (orderid);
+
+/*==============================================================*/
+/* Table: pay_info                                              */
+/*==============================================================*/
+create table pay_info
+(
+   payid                varchar(20) not null comment '支付id',
+   userid               int comment '用户id',
+   orderid              varchar(20) not null comment '订单id',
+   payplatform          int(1) not null comment '支付平台:1-支付宝,2-微信',
+   platformnumber       varchar(200) not null comment '支付流水号',
+   platformstatus       varchar(20) not null comment '支付状态',
+   createtime           datetime not null comment '交易开始时间',
+   updatetime           datetime not null comment '交易结束时间'
+)
+type = InnoDB;
+
+alter table pay_info
+   add primary key (payid);
+
+/*==============================================================*/
+/* Table: product_brand                                         */
+/*==============================================================*/
+create table product_brand
+(
+   brandid              varchar(64) not null comment '品牌id',
+   proid                vachar(20) not null default NULL comment '商品id',
+   detail               varchar(50) not null default NULL comment '品牌详述',
+   name                 vachar(20) default '1' comment '商品名称',
+   logo                 vachar(64) not null default '1' comment '商品logo',
+   createtime           datetime not null default NULL comment '创建时间',
+   updatetime           datetime not null default NULL comment '更新时间'
+)
+type = InnoDB;
+
+alter table product_brand
+   add primary key (brandid);
+
+/*==============================================================*/
+/* Table: product_image                                         */
+/*==============================================================*/
+create table product_image
+(
+   imageid              varchar(20) not null comment '图片id',
+   url                  varchar(500) not null comment '图片url',
+   status               int(1) not null comment '状态：0-轮播，1-详情',
+   proid                varchar(20) not null comment '商品id',
+   remarks              varchar(20) not null comment '备注',
+   createtime           datetime not null comment '创建时间',
+   updatetime           datetime not null comment '更新时间'
+)
+type = InnoDB;
+
+alter table product_image
+   add primary key (imageid);
+
+/*==============================================================*/
+/* Table: product_spu                                           */
+/*==============================================================*/
+create table product_spu
+(
+   proid                varchar(20) not null comment '商品id',
+   name                 varchar(10) not null comment '商品名称',
+   wareid               varchar(20) not null default NULL comment '仓库id',
+   qrcode               varchar(500) not null default NULL comment '国条码
+            ',
+   imageid              vachar(20) not null comment '图片id',
+   supplierid           varchar(20) not null comment '供应商id',
+   brandid              varchar(64) not null comment '品牌id',
+   productdate          datetime not null comment '生产日期',
+   price                decimal(20,2) not null comment '价格,单位-元',
+   stock                int(11) not null comment '库存数量',
+   status               int(6) not null default 1 comment '商品状态.1-在售 2-下架 3-删除',
+   createtime           datetime not null default NULL comment '创建时间',
+   updatetime           datetime not null default NULL comment '更新时间'
+)
+type = InnoDB;
+
+alter table product_spu
+   add primary key (proid);
+
+alter table product_spu
+   add unique FK_Reference_1 ();
+
+/*==============================================================*/
+/* Table: product_supplier                                      */
+/*==============================================================*/
+create table product_supplier
+(
+   supplierid           varchar(20) not null comment '供应商id',
+   people               varchar(10) not null comment '供应商联系人',
+   name                 varchar(10) not null comment '供应商名称',
+   number               varchar(64) not null comment '供应商联系号码',
+   proid                vachar(20) not null comment '商品id',
+   license              varchar(64) not null comment '营业执照',
+   createtime           datetime not null comment '创建时间',
+   updatetime           datetime not null comment '更新时间'
+)
+type = InnoDB;
+
+alter table product_supplier
+   add primary key (supplierid);
+
+/*==============================================================*/
+/* Table: product_warehouse                                     */
+/*==============================================================*/
+create table product_warehouse
+(
+   wareid               varchar(20) not null comment '仓库Id',
+   proid                varchar(20) default NULL comment '商品id',
+   remaining            int(10) default NULL comment '剩余数量',
+   sold                 int(10) default 1 comment '已售数量',
+   createtime           datetime default NULL comment '创建时间',
+   updatetime           datetime default NULL comment '更新时间'
+)
+type = InnoDB;
+
+alter table product_warehouse
+   add primary key (wareid);
+
+/*==============================================================*/
+/* Table: users                                                 */
+/*==============================================================*/
+create table users
+(
+   userid               int not null auto_increment comment '用户id',
+   username             varchar(10) not null comment '用户名',
+   nickname             varchar(10) not null comment '用户昵称',
+   password             varchar(8) not null comment '密码',
+   telephone            varchar(11) not null comment '手机号码',
+   sex                  varchar(2) not null comment '性别',
+   birthday             datetime comment '生日',
+   email                varchar(20) comment '邮箱',
+   level                int(1) not null comment '会员等级：0-普通用户，1-会员用户',
+   address              varchar(30) comment '居住地址',
+   createtime           datetime not null comment '创建时间',
+   updatetime           datetime not null comment '更新时间'
+)
+type = InnoDB;
+
+alter table users
+   add primary key (userid);
+
+alter table cart add constraint FK_cart_pro foreign key (proid)
+      references product_spu (proid) on delete restrict on update restrict;
+
+alter table cart add constraint FK_cart_user foreign key (userid)
+      references users (userid) on delete restrict on update restrict;
+
+alter table delivery_info add constraint FK_del_order foreign key (orderid)
+      references orders (orderid) on delete restrict on update restrict;
+
+alter table delivery_info add constraint FK_del_user foreign key (userid)
+      references users (userid) on delete restrict on update restrict;
+
+alter table orders add constraint FK_order_product foreign key (proid)
+      references product_spu (proid) on delete restrict on update restrict;
+
+alter table pay_info add constraint FK_pay_order foreign key (orderid)
+      references orders (orderid) on delete restrict on update restrict;
+
+alter table pay_info add constraint FK_pay_user foreign key (userid)
+      references users (userid) on delete restrict on update restrict;
+
+alter table product_spu add constraint FK_spu_brand foreign key (brandid)
+      references product_brand (brandid) on delete restrict on update restrict;
+
+alter table product_spu add constraint FK_spu_image foreign key (imageid)
+      references product_image (imageid) on delete restrict on update restrict;
+
+alter table product_spu add constraint FK_spu_supplier foreign key (supplierid)
+      references product_supplier (supplierid) on delete restrict on update restrict;
+
+alter table product_spu add constraint FK_spu_ware foreign key (wareid)
+      references product_warehouse (wareid) on delete restrict on update restrict;
+
