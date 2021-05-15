@@ -1,7 +1,7 @@
-package com.zgkaii.mysql.mission09.controller;
+package com.zgkaii.sharding.controller;
 
-import com.zgkaii.mysql.mission09.entity.Student;
-import com.zgkaii.mysql.mission09.service.StudentService;
+import com.zgkaii.sharding.entity.User;
+import com.zgkaii.sharding.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +15,19 @@ import java.util.List;
  * @Description:
  **/
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/user")
 public class StudentController {
 
     @Autowired
-    StudentService studentService;
+    UserMapper userMapper;
 
     @GetMapping("/query")
-    public List<Student> query() {
-        return studentService.query();
+    public List<User> query() {
+        return userMapper.query();
     }
 
     @GetMapping("/insert")
-    public void insert(Student student) {
-        studentService.insert(student);
+    public void insert(User user) {
+        userMapper.insert(user);
     }
 }

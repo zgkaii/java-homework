@@ -1,0 +1,47 @@
+server:
+  port: 8090
+
+spring:
+  enabled: true # 是否启用sharding
+  shardingsphere:
+    props: # 打印sql
+      sql-show: true
+    datasource:
+      common:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
+      # 数据库别名
+      names: ds1,ds2,ds3
+      ds1:
+        url: jdbc:mysql://localhost:3316/db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2b8
+        username: root
+        password: 513701
+      ds2:
+        url: jdbc:mysql://localhost:3326/db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2b8
+        username: root
+        password: 513701
+      ds3:
+        url: jdbc:mysql://localhost:3326/db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2b8
+        username: root
+        password: 513701
+    rules:
+      replica-query:
+        load-balancers:
+          # 负载均衡算法
+          round-robin:
+            type: ROUND_ROBIN
+            props:
+              default: 0
+        data-sources:
+          # 主从名称，可任意写
+          props:
+            # 配置主库,负责数据写入
+            primary-data-source-name: ds1
+            # 配置从库节点
+            replica-data-source-names: ds2,ds3
+            # 配置从库节点负载均衡策略，采用轮询机制
+            load-balancer-name: round_robin
+
+mybatis:
+  type-aliases-package: com.zgkaii.sharding.entity
+  mapper-locations: classpath:/mapper/*.xml

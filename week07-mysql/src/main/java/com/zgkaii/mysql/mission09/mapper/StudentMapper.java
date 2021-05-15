@@ -1,8 +1,6 @@
 package com.zgkaii.mysql.mission09.mapper;
 
 import com.zgkaii.mysql.mission09.entity.Student;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
