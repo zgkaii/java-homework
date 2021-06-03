@@ -514,57 +514,52 @@ VALUES ('15','16',0,'10',1,'20',1,'2020-12-12 01:34:12');
 /* INSERT DATA IN learn_ds_1                                    */
 /*==============================================================*/
 INSERT INTO learn_ds_1.orders_0(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('17','1',1,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('0','1',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_1(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('18','2',2,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('1','2',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_2(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('19','3',3,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('2','3',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_3(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('20','4',4,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('3','4',3,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_4(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('21','5',5,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('4','5',5,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_5(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('22','6',6,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('5','6',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_6(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('23','7',7,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('6','7',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_7(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('24','8',8,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('7','8',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_8(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('25','9',9,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('8','9',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_9(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('26','10',10,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('9','10',3,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_10(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('27','11',11,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('10','11',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_11(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('28','12',12,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('11','12',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_12(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('29','13',13,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('12','13',1,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_13(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('30','14',14,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('13','14',3,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_14(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('31','15',15,'10',1,'20',1,'2020-12-12 01:34:12');
+VALUES ('14','15',5,'10',1,'20',1,'2020-12-12 01:34:12');
 
 INSERT INTO learn_ds_1.orders_15(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('32','16',16,'10',1,'20',1,'2020-12-12 01:34:12');
-
-INSERT INTO t_order(orderid,proid,userid,payment,paymenttype,postage,ostatus,paymenttime) 
-VALUES ('33','33',33,'10',1,'20',1,'2020-12-12 01:34:12');
-
-UPDATE sharing_db.t_order set proid = '111' WHERE orderid = '12';
+VALUES ('15','16',7,'10',1,'20',1,'2020-12-12 01:34:12');
 
 
 
